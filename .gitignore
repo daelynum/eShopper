@@ -1,0 +1,7 @@
+.idea
+venv
+__pycache__/
+README.md
+eShopper/db.sqlite3
+eShopper/__init__.py
+eShopper/mainapp/__init__.py
