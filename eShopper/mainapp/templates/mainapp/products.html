@@ -1,66 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'mainapp/base.html' %}
+{% load static %}
 
-<head>
+    <title>{{ title }}</title>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    {% block css %}
+        <link href="{% static 'css/products.css'%}" rel="stylesheet">
+    {% endblock %}
 
-    <title>eShopper - Каталог</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/css/products.css" rel="stylesheet">
-
-</head>
 
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a href="" class="text-decoration-none">
-            <h1 class="m-0 display-5 font-weight-semi-bold"><span
-                    class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="products.html">Каталог</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-bag"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="auth/login.html">Войти <i class="fas fa-sign-in-alt"></i></a>
-                </li>
-            </ul>
+{% block navigation %}
+<section class="banner-area">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+
+			</div>
+		</div>
+	</section>
+<header class="header_area">
+    <nav class="navbar navbar-expand-lg bg-dark fixed-top">
+        <div class="container">
+            <a href="{% url 'home' %}" class="text-secondary text-decoration-none">
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                        class="text-secondary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="text-secondary nav-link" href="{% url 'products' %}">Каталог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="text-secondary nav-link" href="#"><i class="fa fa-shopping-cart"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="text-secondary nav-link" href="auth/login.html">Войти <i class="fas fa-sign-in-alt"></i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
+{% endblock %}
 
 <!-- Page Content -->
+{% block content %}
 <div class="container">
 
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-3 ">
 
             <h1 class="my-4"></h1>
+
             <div class="list-group">
-              <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#">Новинки</a>
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#">Одежда</a>
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#">Обувь</a>
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#">Аксессуары</a>
-              <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#">Подарки</a>
+              <a class="bg-dark text-light list-group-item list-group-item-action" data-bs-toggle="list" href="#">Фотоаппараты</a>
+              <a class="bg-dark text-light list-group-item list-group-item-action" data-bs-toggle="list" href="#">Видео</a>
+              <a class="bg-dark text-light list-group-item list-group-item-action" data-bs-toggle="list" href="#">Обьективы</a>
+              <a class="bg-dark text-light list-group-item list-group-item-action" data-bs-toggle="list" href="#">Студийный свет</a>
+              <a class="bg-dark text-light list-group-item list-group-item-action" data-bs-toggle="list" href="#">Аксессуары</a>
             </div>
 
         </div>
@@ -98,18 +102,18 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Adidas-hoodie.png"
+                                 src="{% static 'vendor/img/products/Цифровая%20фотокамера%20Sony%20Alpha%20ILCE-7M3%20Body%20.jpg'%}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Худи черного цвета с монограммами adidas Originals</a>
+                                <a href="#">Цифровая фотокамера Sony Alpha ILCE-7M3 Body </a>
                             </h4>
                             <h5>6 090,00 руб.</h5>
-                            <p class="card-text">Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.</p>
+                            <p class="card-text">Полнокадровая беззеркальная камера a7 III имеет датчик изображения с разрешением 24MP и стабилизацию на основе сдвига матрицы.</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
@@ -118,18 +122,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Blue-jacket-The-North-Face.png" alt="">
+                                 src="{% static 'vendor/img/products/Объектив Sigma AF 35mm f:1.4 DG HSM Art Canon EF.jpg'%}" alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Синяя куртка The North Face</a>
+                                <a href="#">Объектив Sigma AF 35mm f/1.4 DG HSM Art Canon EF</a>
                             </h4>
                             <h5>23 725,00 руб.</h5>
                             <p class="card-text">
-                                Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.
+                                Высокая максимальная светосила F1.4 дает возможность с успехом использовать объектив в таких жанрах как репортаж, портрет, съемка в помещен
                             </p>
                         </div>
                         <div class="card-footer text-center">
@@ -139,18 +143,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png"
+                                 src="{% static 'vendor/img/products/Объектив Sony Carl Zeiss Vario-Tessar T* 24-70mm f:4 ZA OSS (SEL-2470Z).jpg'%}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Коричневый спортивный oversized-топ ASOS DESIGN</a>
+                                <a href="#">Объектив Sony Carl Zeiss Vario-Tessar T* 24-70mm f/4 ZA OSS (SEL-2470Z)</a>
                             </h4>
                             <h5>3 390,00 руб.</h5>
-                            <p class="card-text">Материал с плюшевой текстурой. Удобный и мягкий.</p>
+                            <p class="card-text">Профессиональный объектив ZEISS для полнокадровых камер. Компактный зум-объектив Sony серии SEL2470Z позволят добиться наилучших результатов при съёмке.</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
@@ -159,18 +163,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Black-Nike-Heritage-backpack.png"
+                                 src="{% static 'vendor/img/products/Объектив%20Fujifilm%20XF%2016-55mm%20F2.8%20R%20LM%20WR.jpg'%}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Черный рюкзак Nike Heritage</a>
+                                <a href="#">Объектив Fujifilm XF 16-55mm F2.8 R LM WR</a>
                             </h4>
                             <h5>2 340,00 руб.</h5>
-                            <p class="card-text">Плотная ткань. Легкий материал.</p>
+                            <p class="card-text">Корпорация FUJIFILM с гордостью представляет новый объектив FUJINON XF 16–55 мм F2.8 R LM WR</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
@@ -179,18 +183,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Black-Dr-Martens-shoes.png"
+                                 src="{% static 'vendor/img/products/Цифровая%20фотокамера%20Canon%20EOS%20R6%20Kit%20RF%2024-105mm%20F4-7.1IS%20STM.jpg'%}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex</a>
+                                <a href="#">Цифровая фотокамера Canon EOS R6 Kit RF 24-105mm F4-7.1IS STM</a>
                             </h4>
                             <h5>13 590,00 руб.</h5>
-                            <p class="card-text">Гладкий кожаный верх. Натуральный материал.</p>
+                            <p class="card-text">EOS R6 станет идеальным выбором для увлеченных любителей и профессионалов, которые решили перейти на беззеркальную систему проф уровня.</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
@@ -199,18 +203,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="bg-dark text-light card h-100">
                         <a href="#">
                             <img class="card-img-top"
-                                 src="/static/vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png"
+                                 src="{% static 'vendor/img/products/Цифровая%20фотокамера%20Panasonic%20Lumix%20DC-GH5%20Body.jpg'%}"
                                  alt="">
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Темно-синие широкие строгие брюки ASOS DESIGN</a>
+                                <a href="#">Цифровая фотокамера Panasonic Lumix DC-GH5 Body</a>
                             </h4>
                             <h5>2 890,00 руб.</h5>
-                            <p class="card-text">Легкая эластичная ткань сирсакер Фактурная ткань.</p>
+                            <p class="card-text">Live MOS с разрешением 20.3MP без фильтра низких частот, процессор Venus Engine, передаёт точные цвет и снижает уровень шума.</p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="button" class="btn btn-outline-success">Отправить в корзину</button>
@@ -239,23 +243,15 @@
     </div>
 
 </div>
+{% endblock %}
 <!-- /.container -->
 
 <!-- Footer -->
+{% block footer %}
 <footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; eShopper 2022</p>
     </div>
     <!-- /.container -->
 </footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="/static/vendor/jquery/jquery.min.js"></script>
-<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- FontAwesome script -->
-<script src="/static/vendor/fontawesome/fontawesome-icons.js" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
+{% endblock %}

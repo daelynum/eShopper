@@ -1,15 +1,12 @@
 body {
-    background: url("../vendor/img/wallpaper.jpg") no-repeat center top fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    background: url("../vendor/img/wallpaper.jpeg") no-repeat top fixed;
+    background-color: black;
     padding-top: 56px;
 }
 
 #start-purchase-btn {
-    background-color: #23364e;
-    border-color: #23364e;
+    background-color: #ffbc40;
+    border-color: #ffbc40;
     color: white;
 }
 
