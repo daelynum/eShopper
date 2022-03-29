@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from mainapp.models import Product, ProductCategory
+
 
 def index(request):
     content = {'title': 'EShopper'}
@@ -7,5 +9,7 @@ def index(request):
 
 
 def products(request):
-    content = {'title': 'EShopper - Products'}
+    products = Product.objects.all()
+    categories = ProductCategory.objects.all()
+    content = {'title': 'EShopper - Products', 'products': products, 'categories': categories}
     return render(request, 'mainapp/products.html', content)
