@@ -1,0 +1,18 @@
+[
+  {
+    "model": "mainapp.productcategories",
+    "pk": 1,
+    "fields": {
+      "name": "Фотоаппараты",
+      "description": "устройство для регистрации неподвижных изображений"
+    }
+  },
+  {
+    "model": "mainapp.productcategories",
+    "pk": 2,
+    "fields": {
+      "name": "Обьективы",
+      "description": "Оптическая система, являющаяся частью оптического прибора"
+    }
+  }
+]

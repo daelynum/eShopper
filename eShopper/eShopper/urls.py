@@ -16,14 +16,16 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
+from authapp.views import login, register, logout
 from mainapp.views import index, products
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='home'),
-    path('products/', products, name='products')
+    path('user/', include('authapp.urls', namespace='authapp')),
+    path('products/', include('mainapp.urls', namespace='products')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
