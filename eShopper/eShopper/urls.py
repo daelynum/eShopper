@@ -23,9 +23,9 @@ from mainapp.views import index, products
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='home'),
     path('user/', include('authapp.urls', namespace='authapp')),
-    path('products/', include('mainapp.urls', namespace='products')),
+    path('', include('mainapp.urls', namespace='products')),
+    path('basket/', include('basketapp.urls', namespace='basket')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

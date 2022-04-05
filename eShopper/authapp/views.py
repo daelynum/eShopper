@@ -1,10 +1,12 @@
 import django.contrib.auth.context_processors
-from django.contrib import auth
+from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from authapp.forms import UserLoginForm, UserRegisterForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from basketapp.models import Basket
 
 
 def login(request):
@@ -25,11 +27,7 @@ def login(request):
             if user.is_active:
                 # логинимся и делаем редирект на страницу home
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('home'))
-            else:
-                print('user не найден')
-        else:
-            print(form.errors)
+                return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         form = UserLoginForm()
     content = {
@@ -47,9 +45,8 @@ def register(request):
         # проверяем правильно ли заполнены поля
         if form.is_valid():
             form.save()
+            messages.success(request, 'Пользователь успешно зарегистрирован')
             return HttpResponseRedirect(reverse('authapp:login'))
-        else:
-            print(form.errors)
     else:
         form = UserRegisterForm()
     content = {
@@ -62,3 +59,19 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'mainapp/index.html')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+    user_select = request.user
+
+    content = {
+        'title': 'eShopper | Profile',
+        'form': UserProfileForm(instance=request.user),
+        'basket': Basket.objects.filter(user=user_select)
+    }
+    return render(request, 'authapp/profile.html', content)
