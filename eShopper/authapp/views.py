@@ -69,6 +69,8 @@ def profile(request):
             form.save()
     user_select = request.user
 
+    baskets = Basket.objects.filter(user=user_select)
+
     content = {
         'title': 'eShopper | Profile',
         'form': UserProfileForm(instance=request.user),
