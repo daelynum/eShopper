@@ -1,68 +1,49 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy
 
 from adminapp.forms import UserAdminRegisterForm, AdminUserProfileForm
 from authapp.models import User
-from django.contrib.auth.decorators import user_passes_test
+from django.views.generic import ListView, UpdateView, DeleteView, TemplateView, CreateView
+
+from mainapp.mixin import BaseClassContextMixin, CustomDispatchMixin
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def index(request):
-    return render(request, 'adminapp/admin.html')
+class IndexTemplateView(TemplateView, BaseClassContextMixin, CustomDispatchMixin):
+    template_name = 'adminapp/admin.html'
+    title = "Admin | Главная"
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def admin_users(request):
-    content = {
-        'title': 'Admin | Пользователи',
-        'users': User.objects.all(),
-    }
-    return render(request, 'adminapp/admin-users-read.html', content)
+class UserListView(ListView, BaseClassContextMixin, CustomDispatchMixin):
+    model = User
+    template_name = 'adminapp/admin-users-read.html'
+    title = "Admin | Пользователи"
+    context_object_name = 'users'
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_create(request):
-    if request.method == 'POST':
-        form = UserAdminRegisterForm(data=request.POST, files=request.FILES)
-        if form.is_valid:
-            form.save()
-            return HttpResponseRedirect(reverse('adminapp:admin_users'))
-        else:
-            print(form.errors)
-    else:
-        form = UserAdminRegisterForm()
-    content = {
-        'title': 'Admin | Регистрация',
-        'form': form
-    }
-    return render(request, 'adminapp/admin-users-create.html', content)
+class UserCreateView(CreateView, BaseClassContextMixin, CustomDispatchMixin):
+    title = 'Admin | Регистрация'
+    form_class = UserAdminRegisterForm
+    model = User
+    template_name = 'adminapp/admin-users-create.html'
+    success_url = reverse_lazy('adminapp:admin_users')
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_update(request, id):
-    user_select = User.objects.get(id=id)
-    if request.method == 'POST':
-        form = AdminUserProfileForm(data=request.POST, instance=user_select, files=request.FILES)
-        if form.is_valid:
-            form.save()
-            return HttpResponseRedirect(reverse('adminapp:admin_users'))
-        else:
-            print(form.errors)
-    else:
-        form = AdminUserProfileForm(instance=user_select)
-    content = {
-        'title': 'Admin | Обновление данных',
-        'form': form,
-        'user_select': user_select
-    }
-    return render(request, 'adminapp/admin-users-update-delete.html', content)
+class UserUpdateView(UpdateView, BaseClassContextMixin, CustomDispatchMixin):
+    title = 'Admin | Обновление данных'
+    form_class = AdminUserProfileForm
+    model = User
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('adminapp:admin_users')
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def user_delete(request, id):
-    user = User.objects.get(id=id)
-    user.is_active = False
-    user.save()
+class DeleteUserView(DeleteView, BaseClassContextMixin, CustomDispatchMixin):
+    model = User
+    template_name = 'adminapp/admin-users-update-delete.html'
+    success_url = reverse_lazy('adminapp:admin_users')
 
-    return HttpResponseRedirect(reverse('adminapp:admin_users'))
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.is_active = False
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())

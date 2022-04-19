@@ -18,9 +18,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from authapp.views import login, register, logout
-from mainapp.views import index, products
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('authapp.urls', namespace='authapp')),
