@@ -1,0 +1,16 @@
+body {
+    background: url("../vendor/img/wallpaper.jpeg") no-repeat top fixed;
+    background-color: black;
+    padding-top: 56px;
+}
+
+#start-purchase-btn {
+    background-color: #ffbc40;
+    border-color: #ffbc40;
+    color: white;
+}
+
+#start-purchase-link {
+    text-decoration: none;
+    color: white;
+}

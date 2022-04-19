@@ -1,0 +1,74 @@
+[
+  {
+    "model": "mainapp.product",
+    "pk": 1,
+    "fields": {
+      "name": "Цифровая фотокамера Sony Alpha ILCE-7M3 Body",
+      "image": "images/Цифровая_фотокамера_Sony_Alpha_ILCE-7M3_Body_.jpg",
+      "description": "Полнокадровая беззеркальная камера a7 III имеет датчик изображения с разрешением 24MP и стабилизацию на основе сдвига матрицы.",
+      "price": 120000,
+      "quantity": 20,
+      "category": 1
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 2,
+    "fields": {
+      "name": "Объектив Sigma AF 35mm f/1.4 DG HSM Art Canon EF",
+      "image": "images/Объектив_Sigma_AF_35mm_f1.4_DG_HSM_Art_Canon_EF.jpg",
+      "description": "светосильный объектив, специально оптимизированный для работы с цифровыми зеркальными камерами. Модель оборудована ультразвуковым мотором (HSM, Hyper Sonic Motor), поэтому обеспечивает быструю и тихую автофокусировку, с сохранением возможности ручной фокусировки.",
+      "price": 90000,
+      "quantity": 20,
+      "category": 2
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 3,
+    "fields": {
+      "name": "Объектив Sony Carl Zeiss Vario-Tessar T* 24-70mm f/4 ZA OSS (SEL-2470Z)",
+      "image": "images/Объектив_Sony_Carl_Zeiss_Vario-Tessar_T_24-70mm_f4_ZA_OSS_SEL-2470Z.jpg",
+      "description": "Профессиональный объектив ZEISS для полнокадровых камер. Компактный зум-объектив Sony серии SEL2470Z позволят добиться наилучших результатов при съёмке.",
+      "price": 89000,
+      "quantity": 20,
+      "category": 2
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "Объектив Fujifilm XF 16-55mm F2.8 R LM WR",
+      "image": "images/Объектив_Fujifilm_XF_16-55mm_F2.8_R_LM_WR.jpg",
+      "description": "Корпорация FUJIFILM с гордостью представляет новый объектив FUJINON XF 16–55 мм F2.8 R LM WR",
+      "price": 111000,
+      "quantity": 20,
+      "category": 2
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "Цифровая фотокамера Canon EOS R6 Kit RF 24-105mm F4-7.1IS STM",
+      "image": "images/Цифровая_фотокамера_Canon_EOS_R6_Kit_RF_24-105mm_F4-7.1IS_STM.jpg",
+      "description": "EOS R6 станет идеальным выбором для увлеченных любителей и профессионалов, которые решили перейти на беззеркальную систему проф уровня.",
+      "price": 123000,
+      "quantity": 20,
+      "category": 1
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "Цифровая фотокамера Panasonic Lumix DC-GH5 Body",
+      "image": "images/Цифровая_фотокамера_Panasonic_Lumix_DC-GH5_Body.jpg",
+      "description": "Live MOS с разрешением 20.3MP без фильтра низких частот, процессор Venus Engine, передаёт точные цвет и снижает уровень шума.",
+      "price": 67000,
+      "quantity": 20,
+      "category": 2
+    }
+  }
+]
