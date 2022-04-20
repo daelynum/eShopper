@@ -3,11 +3,13 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from authapp.models import User
 from basketapp.models import Basket
-from mainapp.mixin import CustomLoginDispatchMixin
+from mainapp.mixin import CustomLoginDispatchMixin, BaseClassContextMixin
 from django.views.generic.base import View
 
 
@@ -82,24 +84,30 @@ class LoginView(View):
 #             form.save()
 #             messages.success(request, 'Пользователь успешно зарегистрирован')
 #             return HttpResponseRedirect(reverse('authapp:login'))
-
-def register(request):
-    # проверяем какой запрос пришел
-    if request.method == 'POST':
-        # передаем в переменную пришедшие данные
-        form = UserRegisterForm(data=request.POST)
-        # проверяем правильно ли заполнены поля
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Пользователь успешно зарегистрирован')
-            return HttpResponseRedirect(reverse('authapp:login'))
-    else:
-        form = UserRegisterForm()
-    content = {
-        'title': 'Регистрация',
-        'form': form
-    }
-    return render(request, 'authapp/register.html', content)
+class RegisterView(CreateView, BaseClassContextMixin):
+    title = 'Admin | Регистрация'
+    form_class = UserRegisterForm
+    model = User
+    template_name = 'authapp/register.html'
+    success_url = reverse_lazy('authapp:login')
+#
+# def register(request):
+#     # проверяем какой запрос пришел
+#     if request.method == 'POST':
+#         # передаем в переменную пришедшие данные
+#         form = UserRegisterForm(data=request.POST)
+#         # проверяем правильно ли заполнены поля
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Пользователь успешно зарегистрирован')
+#             return HttpResponseRedirect(reverse('authapp:login'))
+#     else:
+#         form = UserRegisterForm()
+#     content = {
+#         'title': 'Регистрация',
+#         'form': form
+#     }
+#     return render(request, 'authapp/register.html', content)
 
 
 class LogoutView(View):
