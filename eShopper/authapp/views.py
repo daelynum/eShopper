@@ -9,7 +9,7 @@ from django.views.generic import UpdateView, FormView
 
 from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm, UserProfileEditForm
 from authapp.models import User
-from mainapp.mixin import CustomLoginDispatchMixin, BaseClassContextMixin
+from mainapp.mixin import  BaseClassContextMixin
 
 
 class LoginCustomView(LoginView, BaseClassContextMixin):
@@ -193,38 +193,46 @@ class LogoutCustomView(LogoutView):
 #         }
 #         return render(request, 'authapp/profile.html', content)
 
-class ProfileFormView(UpdateView, BaseClassContextMixin, CustomLoginDispatchMixin):
+class ProfileFormView(UpdateView, BaseClassContextMixin):
     # model = User
     template_name = 'authapp/profile.html'
     form_class = UserProfileForm
     success_url = reverse_lazy('authapp:profile')
     title = 'Gekshop | Профайл'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(ProfileFormView, self).get_context_data()
-    #     context['baskets'] = Basket.objects.filter(user=self.request.user)
-    #     return context
-
     def form_valid(self, form):
-        messages.set_level(self.request, messages.SUCCESS)
-        messages.success(self.request, 'Вы успешно сохранили профиль')
+        messages.set_level(self.request,messages.SUCCESS)
+        messages.success(self.request,'Вы успешно сохранили профиль')
         super().form_valid(form)
         return HttpResponseRedirect(self.get_success_url())
 
     def get_object(self, queryset=None):
         return User.objects.get(id=self.request.user.pk)
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProfileFormView, self).get_context_data()
+    #     context['baskets'] = Basket.objects.filter(user=self.request.user)
+    #     return context
 
-    def post(self, request, *args, **kwargs):
-        form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
-        profile_form = UserProfileEditForm(data=request.POST, files=request.FILES, instance=request.user.userprofile)
-        if form.is_valid() and profile_form.is_valid():
-            form.save()
-        return redirect(self.success_url)
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileFormView, self).get_context_data()
-        context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
-        return context
+    # def form_valid(self, form):
+    #     messages.set_level(self.request, messages.SUCCESS)
+    #     messages.success(self.request, 'Вы успешно сохранили профиль')
+    #     super().form_valid(form)
+    #     return HttpResponseRedirect(self.get_success_url())
+    #
+    # def get_object(self, queryset=None):
+    #     return User.objects.get(id=self.request.user.pk)
+    #
+    # def post(self, request, *args, **kwargs):
+    #     form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
+    #     profile_form = UserProfileEditForm(data=request.POST, files=request.FILES, instance=request.user.userprofile)
+    #     if form.is_valid() and profile_form.is_valid():
+    #         form.save()
+    #     return redirect(self.success_url)
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(ProfileFormView, self).get_context_data()
+    #     # context['profile'] = UserProfileEditForm(instance=self.request.user.userprofile)
+    #     return context
 # @login_required
 # def profile(request):
 #     if request.method == 'POST':

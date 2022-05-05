@@ -3,12 +3,12 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.template.loader import render_to_string
 
 from basketapp.models import Basket
-from mainapp.mixin import CustomLoginDispatchMixin
+# from mainapp.mixin import CustomLoginDispatchMixin
 from mainapp.models import Product
 from django.views.generic.base import View
 
 
-class BasketAddView(CustomLoginDispatchMixin, View):
+class BasketAddView(View):
     def get(self, request, id):
         user_select = request.user
         product = Product.objects.get(id=id)
@@ -38,7 +38,7 @@ class BasketAddView(CustomLoginDispatchMixin, View):
 #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-class BasketRemoveView(CustomLoginDispatchMixin, View):
+class BasketRemoveView( View):
     def get(self, request, basket_id):
         Basket.objects.get(id=basket_id).delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -54,7 +54,7 @@ def is_ajax(request):
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
-class BasketEditView(CustomLoginDispatchMixin, View):
+class BasketEditView(View):
     def get(self, request, id_basket, quantity):
         if is_ajax(request=request):
             basket = Basket.objects.get(id=id_basket)

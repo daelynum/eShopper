@@ -13,10 +13,10 @@ class CustomDispatchMixin(View):
         return super(CustomDispatchMixin, self).dispatch(request, *args, **kwargs)
 
 
-class CustomLoginDispatchMixin(View):
-    @method_decorator(login_required())
-    def dispatch(self, request, *args, **kwargs):
-        return super(CustomLoginDispatchMixin, self).dispatch(request, *args, **kwargs)
+# class CustomLoginDispatchMixin(View):
+#     @method_decorator(login_required())
+#     def dispatch(self, request, *args, **kwargs):
+#         return super(CustomLoginDispatchMixin, self).dispatch(request, *args, **kwargs)
 
 
 class BaseClassContextMixin(ContextMixin):
