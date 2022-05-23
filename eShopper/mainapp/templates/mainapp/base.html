@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>eShopper</title>
+    <title>{{ title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -46,8 +46,24 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="text-light nav-link" href="{% url 'authapp:profile' %}">{{ user.username }}
-                        </a>
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                {% if not user.username %} Пользователь {% else %} {{ user.username }} {% endif %}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="nav-link text-dark" href="{% url 'authapp:profile' %}">
+                                        Профиль
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" href="{% url 'ordersapp:list' %}">
+                                        Заказы
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="text-light nav-link" href="{% url 'adminapp:index' %}">
@@ -79,6 +95,8 @@
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/basket_js.js' %}"></script>
+{#<script src="{% static 'js/jquery.formset.js' %}"></script>#}
+{#<script src="{% static 'js/orders_scripts.js' %}"></script>#}
 
 <!-- FontAwesome script -->
 <script src="{% static 'vendor/fontawesome/fontawesome-icons.js' %}" crossorigin="anonymous"></script>
